@@ -1,0 +1,8 @@
+.pure-form input[type=text] {
+    padding-left: 40px;
+}
+  
+::placeholder { 
+    color: #0082D4;
+}
+  

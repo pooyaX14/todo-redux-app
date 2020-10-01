@@ -1,0 +1,7 @@
+input[type="checkbox"]:checked {
+    background-image: url('../img/checked.png')
+}
+
+input[type=checkbox]:not(:checked) {
+    background-image: url('../img/not-checked.png');
+} 

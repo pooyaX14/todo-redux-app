@@ -1,12 +1,32 @@
+import 'purecss/build/pure-min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+import { history } from './config/network';
+import { Provider } from 'react-redux'; // to connect react with redux
+import {
+  Router,
+  Route,
+} from 'react-router-dom'; // for navigation in the browser
+
+import App from './App';
+import { configureStore, configureDefaultState} from './globalStore/index';
+
+const defaultState = configureDefaultState();
+const store = configureStore(defaultState);
+
+const router = (
+  <Provider store={store}>
+    <Router history={history}>
+      <Route component={App}/>
+    </Router>
+  </Provider>
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {router}
   </React.StrictMode>,
   document.getElementById('root')
 );
