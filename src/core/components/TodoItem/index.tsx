@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import './styles/index.css';
+
 interface Props  {
-    index: number;
+    id: number;
     text: string;
     isCompleted?: boolean;
     onTodoToggle: (id: number) => void;
+    moveUpTodos: (id: number) => void;
+    moveDownTodo: (id: number) => void;
+    length: number;
+    index: number;
 }
 
 
 function TodoItem(props: Props) {
     const [isChecked, toggleCheck] = useState(false);
     const {
+        id,
         index,
         isCompleted,
         text,
@@ -26,22 +32,50 @@ function TodoItem(props: Props) {
         toggleCheck(event.currentTarget.checked);
     }
    
+    const handleUpClick = (index: number) => (e: any) => {
+
+        e = e || window.event;
+       
+        if (e.target.id === 'up' &&  index !== 0 ) {
+            // props.moveUp
+            console.log("up is pressed", index)
+            props.moveUpTodos(index)
+        }
+        else if (e.target.id === 'down' && index !== props.length-1) {
+            console.log("donw  is::: presses", index)
+            props.moveDownTodo(index)
+        }
+    }
+
     return (
-        <StyledLabel
-            htmlFor={`multi-terms${index}`}
-            className="pure-checkbox"
-            isCompleted={isCompleted}
-            onClick={handleClick(index)}
-        >
-            <StyledCheckbox
-                type="checkbox"
-                id={`multi-terms${index}`}
-                value={text}
-                checked={isCompleted}
-                onChange={handleChange}
-            />
-            <span>{text}</span>
-        </StyledLabel>
+        <>
+            <StyledLabel
+                htmlFor={`multi-terms${id}`}
+                className="pure-checkbox"
+                isCompleted={isCompleted}
+                onClick={handleClick(id)}
+            >
+                <StyledCheckbox
+                    type="checkbox"
+                    id={`multi-terms${id}`}
+                    value={text}
+                    checked={isCompleted}
+                    onChange={handleChange}
+                />
+                <span>{text}</span>
+            </StyledLabel>
+            <span style={{'marginLeft': "20px", display: 'inline-block'}}>
+                <button 
+                    style={{ 'marginRight': "30px"}} 
+                    id="up"
+                    onClick={handleUpClick(index)}
+                >Up</button>
+                <button 
+                    id="down" 
+                    onClick={handleUpClick(index)}
+                >Down</button>
+            </span>
+        </>
     );
 }
 

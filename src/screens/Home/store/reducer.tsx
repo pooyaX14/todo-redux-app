@@ -13,7 +13,6 @@ export function todoScreenReducer(
         case TaskActionTypes.ADD_TODO_SUCCESS: 
             const { id, task } = action.payload;
             return {
-                ...state,
                 tasks: [
                     {id, task, isCompleted: false},
                     ...state.tasks
@@ -32,6 +31,36 @@ export function todoScreenReducer(
                 ...state,
                 tasks: [...action.payload.todos]
             }
+        case TaskActionTypes.MOVEUP_TODO_SUCCESS: {
+            const currentIndex = action.payload.id;
+            const prevIndex = currentIndex-1;
+         
+            const newTasks = state.tasks.slice();
+            let temp = newTasks[prevIndex];
+            newTasks[prevIndex] = newTasks[currentIndex];
+            newTasks[currentIndex] = temp;
+
+            return {
+                ...state,
+                tasks: newTasks
+                
+            }
+        }
+        case TaskActionTypes.MOVEDOWN_TODO_SUCCESS: {
+            const currentIndex = action.payload.id;
+            const nextIndex = currentIndex+1;
+            
+            const newTasks = state.tasks.slice();
+            let temp = newTasks[nextIndex];
+            newTasks[nextIndex] = newTasks[currentIndex];
+            newTasks[currentIndex] = temp;
+
+            return {
+                ...state,
+                tasks: newTasks
+                
+            }
+        }
         default:
             return state;
     }

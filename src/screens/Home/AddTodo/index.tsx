@@ -62,7 +62,7 @@ function AddTodo(props: Props) {
                     onError={handleError}
                 />
             </div>
-            <div className="pure-u-2-5">
+            <Actions className="pure-u-2-5">
                 <Button
                     type="button"
                     id="addTodo"
@@ -73,7 +73,7 @@ function AddTodo(props: Props) {
                 {
                     props.actions.map(mapToAction)
                 }
-            </div>
+            </Actions>
         </Row>
     );
 }
@@ -83,4 +83,10 @@ export default AddTodo;
 const Row = styled('form')`
     justify-content: center;
     margin-top: 20px;
+`;
+
+const Actions = styled.div`
+    > button {
+        margin-left: 20px;
+    }
 `;

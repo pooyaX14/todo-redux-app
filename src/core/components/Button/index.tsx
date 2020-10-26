@@ -7,10 +7,11 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     size?: string;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     disabled?: boolean | undefined;
+    className?: string;
 }
 
 function Button(props: Props) {
-    const { disabled, title, onClick } = props;
+    const { disabled, title, onClick, className } = props;
 
     const buttonClass =
         classNames('pure-button', (disabled
@@ -19,7 +20,7 @@ function Button(props: Props) {
         );
     return (
         <StyledButton
-            className={buttonClass}
+            className={`${buttonClass} ${className}`}
             onClick={onClick}
             disabled={disabled}
         >
@@ -29,7 +30,6 @@ function Button(props: Props) {
 }
 
 const StyledButton = styled.button<{disabled: boolean | undefined}>`
-    margin-left: 20px;
     font-size: 125%; 
     background-color: ${(props) => !props.disabled ? "#0082D4" : "" };
 `;

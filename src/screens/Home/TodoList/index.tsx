@@ -2,22 +2,29 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Task } from '../store/types';
 import TodoItem from '../../../core/components/TodoItem';
+import { todoScreenReducer } from '../store/reducer';
 
 interface Props {
     todos: Array<Task>;
     toggleTodo: (id: number) => void;
+    moveUpTodos: (id: number) => void;
+    moveDownTodo: (id: number) => void;
 }
 
 function TodoList(props: Props) {
-    
+    const length = props.todos.length;
     function renderTodos(todos: Array<Task>) {
-        return todos.map((todo, i) => {
+        return todos.map((todo, index) => {
             return <TodoItem
                         key={todo.id}
-                        index={todo.id}
+                        id={todo.id}
+                        index={index}
                         text={todo.task}
                         isCompleted={todo.isCompleted}
-                        onTodoToggle={props.toggleTodo}                
+                        onTodoToggle={props.toggleTodo}   
+                        moveUpTodos={props.moveUpTodos}  
+                        moveDownTodo={props.moveDownTodo}
+                        length={length}           
                     />
         });
     }

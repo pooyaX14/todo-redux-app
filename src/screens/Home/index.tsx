@@ -6,7 +6,7 @@ import AddTodo, { TodoActions } from './AddTodo';
 import TodoList from './TodoList';
 
 import { StateProps } from '../../globalStore/types'
-import { toggleTodo, sortTodos, addTodo } from './store/action';
+import { toggleTodo, sortTodos, addTodo, moveUpTodos, moveDownTodo } from './store/action';
 import { getTodoList } from './store/selector';
 import { Task } from './store/types';
 
@@ -15,6 +15,8 @@ interface Props {
     addTodo: (title: string) => void;
     toggleTodo: (id: number) => void;
     sortTodos: (todos: Array<Task>) => void;
+    moveUpTodos: (id: number) => void;
+    moveDownTodo: (id: number) => void;
 }
 
 function Home(props: Props) {
@@ -23,6 +25,8 @@ function Home(props: Props) {
         addTodo,
         sortTodos,
         toggleTodo,
+        moveUpTodos,
+        moveDownTodo
     } = props;
     
     return (
@@ -36,6 +40,8 @@ function Home(props: Props) {
             <TodoList
                 todos={todos}
                 toggleTodo={toggleTodo}
+                moveUpTodos={moveUpTodos}
+                moveDownTodo={moveDownTodo}
             />
         </>
     );
@@ -53,4 +59,6 @@ export default connect(mapStateToProps, {
     addTodo: addTodo,
     sortTodos: sortTodos,
     toggleTodo: toggleTodo,
+    moveUpTodos: moveUpTodos,
+    moveDownTodo: moveDownTodo
 })(Home);

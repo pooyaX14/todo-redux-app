@@ -1,7 +1,7 @@
 import { TaskActionTypes } from './actionTypes';
 import { Task } from './types';
-  
-export const success = (actionType: any, data?: any) => {
+
+const success = (actionType: any, data?: any) => {
 	return {
 		type: actionType,
 		payload: {
@@ -9,7 +9,7 @@ export const success = (actionType: any, data?: any) => {
 		}
 	}
 }
-export const error = (actionType: any, data?: any) => {
+const error = (actionType: any, data?: any) => {
 	return {
 		type: actionType,
 		payload: {
@@ -20,28 +20,43 @@ export const error = (actionType: any, data?: any) => {
 }
 
 let nextTodoId = 0;
-export const addTodoAction = (task: string) => ({
+const addTodoAction = (task: string) => ({
 	type: TaskActionTypes.ADD_TODO_SUCCESS,
 	payload: {
-	  id: ++nextTodoId,
+	  id: nextTodoId++,
 	  task,
 	}
 });
 
-export const toggleTodoAction = (id: number) => ({
+const toggleTodoAction = (id: number) => ({
 	type: TaskActionTypes.TOGGLE_TODO_SUCCESS,
 	payload: {
 		id
 	}
 });
 
-export const sortTodosAction = (sortedTodos: Array<{}>) => ({
+const sortTodosAction = (sortedTodos: Array<{}>) => ({
 	type: TaskActionTypes.SORT_TODO_SUCCESS,
 	payload: {
 		todos: sortedTodos
 	}
 
-})
+});
+
+const moveUpTodoAction = (id: number) => ({
+	type: TaskActionTypes.MOVEUP_TODO_SUCCESS,
+	payload: {
+		id
+	}
+});
+
+export const moveDownTodo= (id: number) => ({
+	type: TaskActionTypes.MOVEDOWN_TODO_SUCCESS,
+	payload: {
+		id
+	}
+});
+
 
 export function addTodo(task: string) {
 	return(dispatch: any) => {
@@ -89,3 +104,33 @@ export function toggleTodo(id: number) {
 		
 	}
 }
+
+
+export function moveUpTodos(id: number) {
+	return(dispatch: any) => {
+		dispatch(success(TaskActionTypes.MOVEUP_TODO_PENDING));
+		return new Promise((resolve, reject) => {
+			if(id){
+				resolve(dispatch(moveUpTodoAction(id)))
+			} else {
+				reject(dispatch(error(TaskActionTypes.MOVEUP_TODO_ERROR, id)))
+			}
+
+		});
+		
+	}
+}
+
+// export function moveDownTodo(id: number) {
+// 	return(dispatch: any) => {
+// 		dispatch(success(TaskActionTypes.MOVEDOWN_TODO_PENDING));
+// 		return new Promise((resolve, reject) => {
+// 			if(id){
+// 				resolve(dispatch(moveDownTodoAction(id)))
+// 			} else {
+// 				reject(dispatch(error(TaskActionTypes.MOVEDOWN_TODO_ERROR, id)))
+// 			}
+
+// 		});		
+// 	}
+// }
