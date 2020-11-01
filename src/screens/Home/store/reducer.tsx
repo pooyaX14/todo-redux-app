@@ -22,6 +22,7 @@ export function todoScreenReducer(
             const updateTodos = state.tasks.map(todo =>
                 todo.id === action.payload.id ? { ...todo, isCompleted: !todo.isCompleted } : todo
             )
+            console.log(updateTodos)
             return {
                 ...state,
                 tasks: updateTodos

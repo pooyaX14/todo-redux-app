@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Task } from '../store/types';
 import TodoItem from '../../../core/components/TodoItem';
-import { todoScreenReducer } from '../store/reducer';
+
 
 interface Props {
     todos: Array<Task>;

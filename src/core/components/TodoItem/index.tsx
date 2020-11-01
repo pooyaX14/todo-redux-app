@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import './styles/index.css';
 
@@ -25,6 +25,7 @@ function TodoItem(props: Props) {
     } = props;
 
     const handleClick = (id: number) => () => {
+        console.log("id is now", id)
         onTodoToggle(id);
     }
 

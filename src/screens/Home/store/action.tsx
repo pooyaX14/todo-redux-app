@@ -62,7 +62,6 @@ export function addTodo(task: string) {
 	return(dispatch: any) => {
 		dispatch(success(TaskActionTypes.ADD_TODO_PENDING));
 		return new Promise((resolve, reject) => {
-
 			if(task){
 				resolve(dispatch(addTodoAction(task)))
 			} else {
@@ -94,12 +93,7 @@ export function toggleTodo(id: number) {
 	return(dispatch: any) => {
 		dispatch(success(TaskActionTypes.TOGGLE_TODO_PENDING));
 		return new Promise((resolve, reject) => {
-			if(id){
-				resolve(dispatch(toggleTodoAction(id)))
-			} else {
-				reject(dispatch(error(TaskActionTypes.TOGGLE_TODO_ERROR, id)))
-			}
-
+			resolve(dispatch(toggleTodoAction(id)))
 		});
 		
 	}
@@ -110,27 +104,8 @@ export function moveUpTodos(id: number) {
 	return(dispatch: any) => {
 		dispatch(success(TaskActionTypes.MOVEUP_TODO_PENDING));
 		return new Promise((resolve, reject) => {
-			if(id){
-				resolve(dispatch(moveUpTodoAction(id)))
-			} else {
-				reject(dispatch(error(TaskActionTypes.MOVEUP_TODO_ERROR, id)))
-			}
-
+			resolve(dispatch(moveUpTodoAction(id)))
 		});
 		
 	}
 }
-
-// export function moveDownTodo(id: number) {
-// 	return(dispatch: any) => {
-// 		dispatch(success(TaskActionTypes.MOVEDOWN_TODO_PENDING));
-// 		return new Promise((resolve, reject) => {
-// 			if(id){
-// 				resolve(dispatch(moveDownTodoAction(id)))
-// 			} else {
-// 				reject(dispatch(error(TaskActionTypes.MOVEDOWN_TODO_ERROR, id)))
-// 			}
-
-// 		});		
-// 	}
-// }

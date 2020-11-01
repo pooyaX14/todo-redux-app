@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { useState } from 'react';
 import Input from '../../../core/components/Input';
 import { Error } from '../../../core/components/Input/utils/validators';
 import Button from '../../../core/components/Button';
